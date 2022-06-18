@@ -1,7 +1,7 @@
 import axios from "axios";
 import Notiflix from "notiflix";
 import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
+import "../node_modules/simplelightbox/dist/simple-lightbox.min.css";
 
 const BASE_URL = "https://pixabay.com/api/?key=28124365-0ad47717ab252182c329a634e&";
 
@@ -12,7 +12,7 @@ const submitBtn = document.querySelector(".submit-btn");
 const loadMoreBtn = document.querySelector(".load-more");
 let previousKeyWord = "";
 let page = 1;
-let pageLimit = 4;
+let pageLimit = 40;
 
 form.addEventListener("submit", renderResult);
 loadMoreBtn.addEventListener("click", loadMoreHandler);
@@ -52,7 +52,10 @@ async function searchDataByWords(keyWord) {
             Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
             return;
         }
-        
+        const totalHits = await result.data.totalHits;
+        if (page === 1) {
+            Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+        }
         const imagesProm = await result.data.hits;
         const render = await imagesProm.map(el => `<div class="photo-card">
                 <a class="gallery__link" href="${el.largeImageURL}"><img src="${el.webformatURL}" alt="${el.tags}" loading="lazy" /></a>
@@ -76,13 +79,15 @@ async function searchDataByWords(keyWord) {
                 </div>
             </div>`).join("");
         gallery.insertAdjacentHTML("beforeend", render);
-        const lightbox = new SimpleLightbox(`.gallery a`, {captionsData: "alt", captionDelay: 250})
+       
+        const lightbox = new SimpleLightbox(`.gallery a`, { captionDelay: 250 });
+        lightbox.refresh();
     } catch (error) {
         console.log(error);
     }
     
 }
-const lightbox = new SimpleLightbox(`.gallery a`, {captionsData: "alt", captionDelay: 250})
+
 
 
 
