@@ -29,6 +29,7 @@ body {
     border-radius: 5px;
 }
 .submit-btn:hover {
+    cursor: pointer;
     box-shadow: 3px 3px rgba(255,255,255,0.4), inset 1px 1px rgba(0, 0, 0, 0.4);
 }
 .gallery {
@@ -61,6 +62,7 @@ img {
 }
 .photo-card:hover,
 .photo-card:focus {
+    cursor: pointer;
     transform: scale(1.03);
 }
 .is-hidden {
