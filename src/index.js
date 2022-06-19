@@ -19,7 +19,7 @@ let page = 1;
 let pageLimit = 40;
 
 form.addEventListener("submit", renderResult);
-window.addEventListener("scroll", _.throttle(loadMore, 1000));
+window.addEventListener("scroll", _.throttle(loadMore, 500));
 
 
 function renderResult(e) {
