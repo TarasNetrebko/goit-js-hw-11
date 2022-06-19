@@ -16,7 +16,7 @@ const lightbox = new SimpleLightbox(`.gallery a`, { captionDelay: 250 });
 const windowHeight = document.documentElement.clientHeight;
 let previousKeyWord = "";
 let page = 1;
-let pageLimit = 16;
+let pageLimit = 12;
 
 form.addEventListener("submit", renderResult);
 window.addEventListener("scroll", _.throttle(loadMore, 500));
