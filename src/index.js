@@ -62,7 +62,7 @@ async function searchDataByWords(keyWord) {
             page = 1;
             previousKeyWord = keyWord;
         } else if (keyWord === previousKeyWord) {
-            if (imagesProm === 0) {
+            if (imagesProm.length === 0) {
                 Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
             }
             page += 1;
