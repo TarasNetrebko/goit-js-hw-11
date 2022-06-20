@@ -19,7 +19,7 @@ let page = 1;
 let pageLimit = 40;
 
 form.addEventListener("submit", renderResult);
-window.addEventListener("scroll", _.throttle(loadMore, 500));
+window.addEventListener("scroll", _.throttle(loadMore, 1000));
 
 
 function renderResult(e) {
@@ -63,9 +63,9 @@ async function searchDataByWords(keyWord) {
             previousKeyWord = keyWord;
         } else if (keyWord === previousKeyWord) {
             page += 1;
-            // if (imagesProm.length === 0) {
-            //     Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
-            // }
+            if (imagesProm.length === 0) {
+                Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+            }
         }
         if (page === 1) {
             Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
