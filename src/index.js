@@ -62,11 +62,10 @@ async function searchDataByWords(keyWord) {
             page = 1;
             previousKeyWord = keyWord;
         } else if (keyWord === previousKeyWord) {
+            page += 1;
             if (imagesProm.length === 0) {
-                page += 1;
                 Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
             }
-            page += 1;
         }
         if (page === 1) {
             Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
