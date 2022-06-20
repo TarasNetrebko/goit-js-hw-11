@@ -63,8 +63,8 @@ async function searchDataByWords(keyWord) {
             previousKeyWord = keyWord;
         } else if (keyWord === previousKeyWord) {
             if (imagesProm.length === 0) {
-                Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
                 page += 1;
+                Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
             }
             page += 1;
         }
