@@ -51,6 +51,7 @@ async function searchDataByWords(keyWord) {
     try {
         const result = await axios.get(`${BASE_URL}q=${keyWord}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${pageLimit}`);
         const imagesProm = await result.data.hits;
+        const totalHits = await result.data.totalHits;
         if (keyWord !== previousKeyWord) {
             if (imagesProm.length === 0) {
                 gallery.innerHTML = "";
@@ -61,9 +62,11 @@ async function searchDataByWords(keyWord) {
             page = 1;
             previousKeyWord = keyWord;
         } else if (keyWord === previousKeyWord) {
+            if (imagesProm === 0) {
+                Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+            }
             page += 1;
         }
-        const totalHits = await result.data.totalHits;
         if (page === 1) {
             Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
         }
@@ -92,7 +95,6 @@ async function searchDataByWords(keyWord) {
         lightbox.refresh();
     } catch (error) {
         console.log(error);
-        Notiflix.Notify.info("We're sorry, but you've reached the end of search results.")
     }
     
 }
